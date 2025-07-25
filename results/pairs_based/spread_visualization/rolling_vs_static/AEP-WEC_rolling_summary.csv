@@ -1,0 +1,2 @@
+ticker1,ticker2,ols_window_days,zscore_window_days,beta_mean,beta_std,beta_min,beta_max,zscore_mean,zscore_std,zscore_max_abs,pct_within_2sigma,static_beta,static_zscore_max_abs,data_start,data_end,num_observations
+AEP,WEC,90,45,0.8692858894964822,0.2648976564377193,-0.033169783802570185,1.5920799053329584,0.18749479854480983,1.5307663959044382,3.942476759339698,78.90535042603823,0.7859243687081678,14.694247665203296,2020-12-31 11:00:00,2024-12-31 10:45:00,26054

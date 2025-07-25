@@ -1,0 +1,2 @@
+ticker1,ticker2,ols_window_days,zscore_window_days,beta_mean,beta_std,beta_min,beta_max,zscore_mean,zscore_std,zscore_max_abs,pct_within_2sigma,static_beta,static_zscore_max_abs,data_start,data_end,num_observations
+MAA,CPT,90,45,1.1704546253746289,0.17169713058105163,0.6777071703588485,1.6363884568813534,-0.013154793777776442,1.5762734118118895,4.753688861038383,78.74904067536454,1.1727510611716168,7.651028676560287,2020-12-31 11:00:00,2024-12-31 10:45:00,26060

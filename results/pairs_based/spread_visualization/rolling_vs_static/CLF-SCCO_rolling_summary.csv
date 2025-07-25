@@ -1,0 +1,2 @@
+ticker1,ticker2,ols_window_days,zscore_window_days,beta_mean,beta_std,beta_min,beta_max,zscore_mean,zscore_std,zscore_max_abs,pct_within_2sigma,static_beta,static_zscore_max_abs,data_start,data_end,num_observations
+CLF,SCCO,90,45,0.17209650307341287,0.20949382460458368,-0.20311928159435946,0.6809435358080808,0.26344536319436646,1.5696050280198532,4.417717111034637,79.27119294207901,-0.2663315330760116,6.961240734193114,2020-12-31 11:00:00,2024-12-31 10:45:00,26070

@@ -1,0 +1,2 @@
+ticker1,ticker2,ols_window_days,zscore_window_days,beta_mean,beta_std,beta_min,beta_max,zscore_mean,zscore_std,zscore_max_abs,pct_within_2sigma,static_beta,static_zscore_max_abs,data_start,data_end,num_observations
+VLO,PBF,90,45,2.045787898513541,0.5068282920563794,0.8227639956507117,2.875747117621633,-0.016907688961629756,1.5018024784217976,4.9263099086524855,82.57866462010745,2.3335559588817776,14.819183007926128,2020-12-31 11:00:00,2024-12-31 10:45:00,26060

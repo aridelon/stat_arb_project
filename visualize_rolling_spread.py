@@ -55,33 +55,51 @@ class RollingSpreadVisualizer:
         pair_name1 = f"{self.ticker1}-{self.ticker2}"
         pair_name2 = f"{self.ticker2}-{self.ticker1}"
         
-        for filename in os.listdir(self.results_path):
-            if filename.endswith('_2021_summary.csv'):
-                filepath = os.path.join(self.results_path, filename)
-                df = pd.read_csv(filepath)
+        # Search in the organized subdirectories where summary files are located
+        search_paths = [
+            # Sector-based 2021 summary files  
+            os.path.join(self.results_path, 'pairs_based', 'cointegration_test_result', '2021'),
+            # Individual pair static summary files
+            os.path.join(self.results_path, 'pairs_based', 'spread_visualization', 'static_spread'),
+            # Legacy location (original results folder)
+            self.results_path
+        ]
+        
+        for search_path in search_paths:
+            if not os.path.exists(search_path):
+                continue
                 
-                if pair_name1 in df['pair'].values:
-                    row = df[df['pair'] == pair_name1].iloc[0]
-                    self.static_beta = row['beta']
-                    self.static_pvalue = row['coint_pvalue']
-                    self.static_halflife = row['halflife']
-                    print(f"\n2021 Static Analysis Results:")
-                    print(f"Beta: {self.static_beta:.4f}")
-                    print(f"P-value: {self.static_pvalue:.5f}")
-                    print(f"Half-life: {self.static_halflife:.1f} bars ({self.static_halflife/26:.1f} days)")
-                    return True
-                    
-                elif pair_name2 in df['pair'].values:
-                    row = df[df['pair'] == pair_name2].iloc[0]
-                    self.static_beta = 1 / row['beta']
-                    self.static_pvalue = row['coint_pvalue']
-                    self.static_halflife = row['halflife']
-                    self.ticker1, self.ticker2 = self.ticker2, self.ticker1
-                    print(f"\n2021 Static Analysis Results (reversed to {self.ticker1}-{self.ticker2}):")
-                    print(f"Beta: {self.static_beta:.4f}")
-                    print(f"P-value: {self.static_pvalue:.5f}")
-                    print(f"Half-life: {self.static_halflife:.1f} bars ({self.static_halflife/26:.1f} days)")
-                    return True
+            for filename in os.listdir(search_path):
+                if filename.endswith('_2021_summary.csv') or filename.endswith('_static_summary.csv'):
+                    filepath = os.path.join(search_path, filename)
+                    try:
+                        df = pd.read_csv(filepath)
+                        
+                        if pair_name1 in df['pair'].values:
+                            row = df[df['pair'] == pair_name1].iloc[0]
+                            self.static_beta = row['beta']
+                            self.static_pvalue = row['coint_pvalue']
+                            self.static_halflife = row['halflife']
+                            print(f"\n2021 Static Analysis Results (found in {filename}):")
+                            print(f"Beta: {self.static_beta:.4f}")
+                            print(f"P-value: {self.static_pvalue:.5f}")
+                            print(f"Half-life: {self.static_halflife:.1f} bars ({self.static_halflife/26:.1f} days)")
+                            return True
+                            
+                        elif pair_name2 in df['pair'].values:
+                            row = df[df['pair'] == pair_name2].iloc[0]
+                            self.static_beta = 1 / row['beta']
+                            self.static_pvalue = row['coint_pvalue']
+                            self.static_halflife = row['halflife']
+                            self.ticker1, self.ticker2 = self.ticker2, self.ticker1
+                            print(f"\n2021 Static Analysis Results (reversed to {self.ticker1}-{self.ticker2}, found in {filename}):")
+                            print(f"Beta: {self.static_beta:.4f}")
+                            print(f"P-value: {self.static_pvalue:.5f}")
+                            print(f"Half-life: {self.static_halflife:.1f} bars ({self.static_halflife/26:.1f} days)")
+                            return True
+                            
+                    except Exception as e:
+                        continue
         
         print(f"WARNING: Could not find static results for {pair_name1}")
         return False
@@ -265,7 +283,72 @@ Static Method Summary:
         print(f"\nPlot saved as: {output_filename}")
         
         plt.show()
+        
+        return static_spread, static_zscore
     
+    def save_results_to_csv(self, rolling_results, static_spread=None, static_zscore=None):
+        """Save all calculated data to CSV for easy backtesting"""
+        # Create results dataframe with rolling OLS data
+        results_df = pd.DataFrame({
+            'datetime': self.price1.index,
+            'price1': self.price1.values,
+            'price2': self.price2.values,
+            'rolling_beta': rolling_results['betas'].values,
+            'rolling_alpha': rolling_results['alphas'].values,
+            'rolling_spread': rolling_results['spread'].values,
+            'rolling_zscore': rolling_results['zscore'].values,
+        })
+        
+        # Add static results if available
+        if static_spread is not None and static_zscore is not None:
+            results_df['static_beta'] = self.static_beta
+            results_df['static_spread'] = static_spread.values
+            results_df['static_zscore'] = static_zscore.values
+        
+        # Add metadata columns
+        results_df['ticker1'] = self.ticker1
+        results_df['ticker2'] = self.ticker2
+        results_df['method'] = 'rolling_ols'
+        results_df['ols_window_bars'] = self.ols_window
+        results_df['ols_window_days'] = self.ols_days
+        results_df['zscore_window_bars'] = self.zscore_window
+        results_df['zscore_window_days'] = self.zscore_days
+        
+        # Save to CSV in the rolling_vs_static folder
+        output_dir = 'results/pairs_based/spread_visualization/rolling_vs_static'
+        os.makedirs(output_dir, exist_ok=True)
+        csv_filename = os.path.join(output_dir, f'{self.ticker1}-{self.ticker2}_rolling_vs_static.csv')
+        results_df.to_csv(csv_filename, index=False)
+        print(f"\nData saved to: {csv_filename}")
+        
+        # Also save a summary file
+        stats = rolling_results['statistics']
+        summary_df = pd.DataFrame({
+            'ticker1': [self.ticker1],
+            'ticker2': [self.ticker2],
+            'ols_window_days': [self.ols_days],
+            'zscore_window_days': [self.zscore_days],
+            'beta_mean': [stats['beta_mean']],
+            'beta_std': [stats['beta_std']],
+            'beta_min': [stats['beta_min']],
+            'beta_max': [stats['beta_max']],
+            'zscore_mean': [stats['zscore_mean']],
+            'zscore_std': [stats['zscore_std']],
+            'zscore_max_abs': [stats['zscore_max_abs']],
+            'pct_within_2sigma': [stats['pct_within_2sigma']],
+            'static_beta': [self.static_beta if self.static_beta else np.nan],
+            'static_zscore_max_abs': [static_zscore.abs().max() if static_zscore is not None else np.nan],
+            'data_start': [self.price1.index[0]],
+            'data_end': [self.price1.index[-1]],
+            'num_observations': [len(self.price1)]
+        })
+        
+        summary_filename = os.path.join(output_dir, f'{self.ticker1}-{self.ticker2}_rolling_summary.csv')
+        summary_df.to_csv(summary_filename, index=False)
+        print(f"Summary saved to: {summary_filename}")
+        
+        return results_df
+
     def run(self):
         """Main execution method"""
         print(f"\nRolling OLS Analysis: {self.ticker1}-{self.ticker2}")
@@ -302,8 +385,11 @@ Static Method Summary:
             if isinstance(value, float):
                 print(f"  {key}: {value:.3f}")
         
-        # Create visualization
-        self.plot_comparison(rolling_results)
+        # Create visualization and get static results
+        static_spread, static_zscore = self.plot_comparison(rolling_results)
+        
+        # Save results to CSV
+        self.save_results_to_csv(rolling_results, static_spread, static_zscore)
 
 def main():
     if len(sys.argv) < 3:

@@ -21,7 +21,7 @@ class StaticSpreadVisualizer:
         
         # Data paths
         self.data_base_path = '/Users/aridelondavidwinayu/Downloads/Project/EODHD API/us_equity_data'
-        self.results_path = '/Users/aridelondavidwinayu/Downloads/Project/stat_arb_project/results'
+        self.results_path = '/Users/aridelondavidwinayu/Downloads/Project/stat_arb_project/results/pairs_based/cointegration_test_result/2021'
         
         # Will be populated by load_2021_statistics()
         self.beta_2021 = None
@@ -60,10 +60,12 @@ class StaticSpreadVisualizer:
                     row = df[df['pair'] == pair_name1].iloc[0]
                     self.beta_2021 = row['beta']
                     self.alpha_2021 = row['alpha'] if 'alpha' in row else 0
+                    self.coint_pvalue = row['coint_pvalue']
+                    self.halflife = row['halflife']
                     print(f"Found {pair_name1} in {filename}")
                     print(f"2021 Beta: {self.beta_2021:.4f}")
-                    print(f"2021 p-value: {row['coint_pvalue']:.5f}")
-                    print(f"2021 Half-life: {row['halflife']:.1f} bars ({row['halflife']/26:.1f} days)")
+                    print(f"2021 p-value: {self.coint_pvalue:.5f}")
+                    print(f"2021 Half-life: {self.halflife:.1f} bars ({self.halflife/26:.1f} days)")
                     return True
                     
                 elif pair_name2 in df['pair'].values:
@@ -71,11 +73,13 @@ class StaticSpreadVisualizer:
                     # Reverse the relationship
                     self.beta_2021 = 1 / row['beta']
                     self.alpha_2021 = -row['alpha'] / row['beta'] if 'alpha' in row else 0
+                    self.coint_pvalue = row['coint_pvalue']
+                    self.halflife = row['halflife']
                     self.ticker1, self.ticker2 = self.ticker2, self.ticker1  # Swap order
                     print(f"Found {pair_name2} in {filename} (reversed to {self.ticker1}-{self.ticker2})")
                     print(f"2021 Beta: {self.beta_2021:.4f}")
-                    print(f"2021 p-value: {row['coint_pvalue']:.5f}")
-                    print(f"2021 Half-life: {row['halflife']:.1f} bars ({row['halflife']/26:.1f} days)")
+                    print(f"2021 p-value: {self.coint_pvalue:.5f}")
+                    print(f"2021 Half-life: {self.halflife:.1f} bars ({self.halflife/26:.1f} days)")
                     return True
         
         print(f"ERROR: Could not find pair {pair_name1} or {pair_name2} in 2021 results!")
@@ -172,6 +176,57 @@ class StaticSpreadVisualizer:
         print(f"\nTotal data points: {len(self.price1)}")
         print(f"Date range: {self.price1.index[0]} to {self.price1.index[-1]}")
     
+    def save_results_to_csv(self):
+        """Save all calculated data to CSV for easy backtesting"""
+        # Create results dataframe
+        results_df = pd.DataFrame({
+            'datetime': self.price1.index,
+            'price1': self.price1.values,
+            'price2': self.price2.values,
+            'static_beta': self.beta_2021,  # Constant value
+            'spread': self.spread.values,
+            'zscore': self.zscore.values,
+            'spread_mean_2021': self.spread_mean_2021,
+            'spread_std_2021': self.spread_std_2021
+        })
+        
+        # Add metadata columns
+        results_df['ticker1'] = self.ticker1
+        results_df['ticker2'] = self.ticker2
+        results_df['method'] = 'static_ols'
+        results_df['beta_calculation'] = '2021_fixed'
+        results_df['coint_pvalue_2021'] = self.coint_pvalue
+        results_df['halflife_2021_bars'] = self.halflife
+        
+        # Save to CSV
+        csv_filename = f'results/{self.ticker1}-{self.ticker2}_static_spread_{self.start_year}-{self.end_year}.csv'
+        os.makedirs('results', exist_ok=True)
+        results_df.to_csv(csv_filename, index=False)
+        print(f"\nData saved to: {csv_filename}")
+        
+        # Also save a summary file
+        summary_df = pd.DataFrame({
+            'ticker1': [self.ticker1],
+            'ticker2': [self.ticker2],
+            'beta_2021': [self.beta_2021],
+            'spread_mean_2021': [self.spread_mean_2021],
+            'spread_std_2021': [self.spread_std_2021],
+            'coint_pvalue_2021': [self.coint_pvalue],
+            'halflife_bars': [self.halflife],
+            'halflife_days': [self.halflife / 26],
+            'zscore_max_abs': [self.zscore.abs().max()],
+            'zscore_pct_within_2sigma': [(self.zscore.abs() <= 2).mean() * 100],
+            'data_start': [self.price1.index[0]],
+            'data_end': [self.price1.index[-1]],
+            'num_observations': [len(self.price1)]
+        })
+        
+        summary_filename = f'results/{self.ticker1}-{self.ticker2}_static_summary.csv'
+        summary_df.to_csv(summary_filename, index=False)
+        print(f"Summary saved to: {summary_filename}")
+        
+        return results_df
+    
     def plot_spread_and_zscore(self):
         """Create visualization of spread and z-score"""
         fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(15, 10), sharex=True)
@@ -228,6 +283,13 @@ class StaticSpreadVisualizer:
         print("SPREAD SUMMARY STATISTICS")
         print("="*60)
         
+        # Overall statistics
+        print(f"\nOverall ({self.start_year}-{self.end_year}):")
+        print(f"  Spread - Mean: {self.spread.mean():.4f}, Std: {self.spread.std():.4f}")
+        print(f"  Z-Score - Mean: {self.zscore.mean():.4f}, Std: {self.zscore.std():.4f}")
+        print(f"  Z-Score range: [{self.zscore.min():.2f}, {self.zscore.max():.2f}]")
+        print(f"  % within ±2σ: {(self.zscore.abs() <= 2).mean() * 100:.1f}%")
+        
         # By year statistics
         for year in range(int(self.start_year), int(self.end_year) + 1):
             year_mask = self.spread.index.year == year
@@ -239,6 +301,7 @@ class StaticSpreadVisualizer:
                 print(f"  Spread - Mean: {year_spread.mean():.4f}, Std: {year_spread.std():.4f}")
                 print(f"  Z-Score - Mean: {year_zscore.mean():.4f}, Std: {year_zscore.std():.4f}")
                 print(f"  Z-Score range: [{year_zscore.min():.2f}, {year_zscore.max():.2f}]")
+                print(f"  % within ±2σ: {(year_zscore.abs() <= 2).mean() * 100:.1f}%")
     
     def run(self):
         """Main execution method"""
@@ -255,6 +318,9 @@ class StaticSpreadVisualizer:
         # Load and process all data
         self.load_and_process_data()
         
+        # Save results to CSV
+        self.save_results_to_csv()
+        
         # Create visualizations
         self.plot_spread_and_zscore()
         
@@ -265,6 +331,7 @@ def main():
     if len(sys.argv) < 3:
         print("Usage: python visualize_static_spread.py <TICKER1> <TICKER2> [start_year] [end_year]")
         print("Example: python visualize_static_spread.py TRV AFL 2021 2024")
+        print("\nNEW: Now saves spread and z-score data to CSV for backtesting!")
         print("\nRecommended pairs from analysis:")
         print("  - TRV AFL   (insurance)")
         print("  - MET TRV   (insurance)")
