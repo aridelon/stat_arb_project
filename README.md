@@ -419,23 +419,6 @@ LB = n(n+2)·Σₖ₌₁ʰ ρ̂ₖ²/(n-k)
 - Target: p-value > 0.05 (white noise residuals)
 - Rolling/Kalman methods achieve LB test acceptance
 
-#### Risk-Adjusted Performance
-**Sharpe Ratio (theoretical):**
-```
-SR = (μᵣ - rᶠ) / σᵣ
-```
-Where μᵣ = expected spread return, σᵣ = spread volatility
-
-**Maximum Drawdown:**
-```
-MDD = max{[max S(τ) - S(t)] / max S(τ)} for t ∈ [0,T]
-```
-
-**Value at Risk (parametric):**
-```
-VaR₅% = μ + 1.645·σ  (assuming normal distribution)
-```
-
 ## File Structure
 
 ```
