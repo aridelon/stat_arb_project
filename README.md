@@ -34,8 +34,8 @@ The energy pair (VLO-PBF) shows the strongest cointegration and fastest mean rev
 
 I tested four different approaches in sequence, each solving problems from the previous method. Here's what I found using AEP-WEC as an example:
 
-| Method | Max |Z-Score| | % within ±2σ | % within ±1σ | Key Issues |
-|--------|--------------|-------------|-------------|------------|
+| Method | Max Z-Score | % within ±2σ | % within ±1σ | Key Issues |
+|--------|-------------|-------------|-------------|------------|
 | **Static OLS** | 14.66 | 40.2% | 24.0% | Severe drift, non-stationary |
 | **Rolling OLS** | 3.94 | 78.9% | 44.6% | Much better, but still jumpy |
 | **Kalman Filter** | 17.24 | 95.5% | 78.6% | Excellent fit, but extreme outliers |
@@ -165,8 +165,8 @@ Where the weights (w) come from the first eigenvector of the Johansen test.
 
 The portfolio spreads generally showed better stationarity than pairs:
 
-| Portfolio | Max |Z-Score| | % within ±2σ | Half-life (Days) | Notes |
-|-----------|--------------|-------------|------------------|--------|
+| Portfolio | Max Z-Score | % within ±2σ | Half-life (Days) | Notes |
+|-----------|-------------|-------------|------------------|-------|
 | ENE_001 | 2.21 | 63.1% | 1.40 | Very fast mean reversion |
 | FIN_001 | 2.95 | 86.7% | 6.81 | Most stable portfolio |
 | MAT_001 | 5.25 | 82.7% | 2.78 | Good balance |
