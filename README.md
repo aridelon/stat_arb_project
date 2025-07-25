@@ -49,7 +49,7 @@ The static approach was a disaster. When I calibrated spreads using 2021 paramet
 - This makes any trading signals completely unreliable
 
 #### Rolling OLS Improvement
-The rolling approach (90-day estimation window, 45-day z-score window) fixed the major issues:
+The rolling approach (390-bar estimation window, using same window for z-scores) fixed the major issues:
 - Maximum z-scores dropped to reasonable levels (under 4.0)
 - ~79% of observations now within ±2σ (nearly doubled!)
 - Much more stable trading signals
@@ -63,10 +63,10 @@ The basic Kalman filter was a revelation:
 - But occasionally had extreme outliers (17+ standard deviations) during market stress
 
 #### Enhanced Kalman Optimization
-The enhanced version added regime detection and outlier control:
+The enhanced version improved parameter initialization and process noise calibration:
 - Reduced maximum z-score from 17.2 to 5.1 
 - Maintained 92.7% within ±2σ (slight trade-off but much safer)
-- Added delta parameter for volatility clustering
+- Added adaptive delta parameter tuning for better noise calibration
 - Best overall balance between fit quality and robustness
 
 ### Beta Stability Analysis
@@ -183,11 +183,11 @@ However, the complexity is much higher - you need to track 4-5 positions instead
 ## Implementation Details
 
 ### Data Infrastructure
-- **Frequency:** 15-minute intraday bars (2021-2024)
-- **Volume:** ~26,000 observations per pair over 4 years
-- **Preprocessing:** Corporate actions adjustment, dividend reinvestment
-- **Quality filters:** Minimum $50M daily volume, no penny stocks
-- **Missing data:** Forward-fill method with maximum 3-period gaps
+- **Frequency:** 15-minute intraday bars
+- **Time period:** 2021-2024 (4 years)
+- **Coverage:** Multiple sectors including utilities, materials, REITs, financials, energy
+- **Data processing:** Pandas-based resampling and alignment utilities
+- **Missing data:** Forward-fill method with filtering for data quality
 
 ### Statistical Methods: Mathematical Foundations
 
@@ -303,29 +303,29 @@ P(t|t) = [1 - K(t)·P₂(t)]·P(t|t-1)
 
 #### 5. Enhanced Kalman Filter
 
-Extension with regime detection and outlier robustness.
+Improved version with better parameter initialization and noise calibration.
 
 **State space model:**
 ```
 μ(t) = μ(t-1) + η₁(t)     [mean level]
 γ(t) = γ(t-1) + η₂(t)     [hedge ratio]
-δ(t) = ρδ(t-1) + η₃(t)    [volatility factor]
 ```
 
 **Observation equation:**
 ```
-S(t) = μ(t) + γ(t)·[P₂(t) - P₂(t-1)] + δ(t)·ε(t)
+S(t) = μ(t) + γ(t)·[P₂(t) - P₂(t-1)] + ε(t)
 ```
 
-**Regime detection:**
-- **Innovation sequence:** ν(t) = S(t) - Ŝ(t|t-1)
-- **Outlier threshold:** |ν(t)| > 3σᵥ triggers robustification
-- **Discount factor:** Reduces Kalman gain during outliers
+**Key improvements:**
+- **Adaptive delta parameter:** Controls process noise scaling for both μ and γ
+- **Data-driven initialization:** Uses OLS on initial data portion for better starting values
+- **Robust process noise:** δ parameter optimized via grid search on validation data
+- **Enhanced stability:** Better numerical properties and outlier handling
 
-**Enhanced features:**
-- **Volatility clustering:** δ(t) captures time-varying spread volatility
-- **Robust updating:** Down-weights observations during market stress
-- **Adaptive learning:** Process noise adapts to market regime
+**Parameter estimation:**
+- **Delta optimization:** Grid search over [1e-7, 1e-3] range
+- **Initialization period:** Uses first 10% of data (minimum 1560 bars) for OLS calibration
+- **Process noise scaling:** Q = δ × [σ²ₑ, σ²ₑ/σ²ₓ] where σ²ₑ is residual variance
 
 #### 6. Half-Life Estimation
 
@@ -386,9 +386,9 @@ C = |{(i,j): p-value(i,j) < 0.05}| / (n choose 2)
 After extensive backtesting, I optimized the following parameters:
 
 **Rolling OLS specifications:**
-- **Estimation window:** 90 days (optimal balance: responsiveness vs noise)
-- **Z-score window:** 45 days (faster volatility adaptation)
-- **Minimum observations:** 50 (data quality threshold)
+- **Estimation window:** 390 bars (15 trading days)
+- **Z-score window:** 390 bars (15 trading days, uses same window)
+- **Minimum observations:** 100 bars (data quality threshold)
 
 **Trading signal thresholds:**
 - **Entry threshold:** ±2.0σ (based on historical false positive analysis)
@@ -397,7 +397,8 @@ After extensive backtesting, I optimized the following parameters:
 
 **Kalman filter parameters:**
 - **Process noise Q:** 1e-4 (moderate adaptation speed)
-- **Observation noise R:** Estimated via EM algorithm
+- **Observation noise R:** Estimated via grid search optimization
+- **Z-score window:** 45 bars (≈1.7 days, shorter for faster signal generation)
 - **Outlier threshold:** 3σ (robust estimation during market stress)
 
 ### Performance Metrics and Statistical Tests

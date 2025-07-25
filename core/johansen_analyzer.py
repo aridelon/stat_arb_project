@@ -460,3 +460,42 @@ class RollingJohansenAnalyzer:
             signals.iloc[i] = position
             
         return signals
+    
+    def _calculate_half_life(self, spread_series):
+        """Calculate half-life of mean reversion using OLS on AR(1) model"""
+        try:
+            # Remove NaN values
+            spread_clean = spread_series.dropna()
+            
+            if len(spread_clean) < 50:
+                return np.nan
+            
+            # Create lagged series for AR(1) regression
+            y = spread_clean.iloc[1:].values  # spread(t)
+            x = spread_clean.iloc[:-1].values  # spread(t-1)
+            
+            # Add constant for intercept
+            X = np.column_stack([np.ones(len(x)), x])
+            
+            # OLS regression: spread(t) = alpha + beta * spread(t-1) + epsilon
+            try:
+                coeffs = np.linalg.lstsq(X, y, rcond=None)[0]
+                beta = coeffs[1]
+                
+                # Half-life calculation
+                if beta >= 1.0 or beta <= 0.0:
+                    return np.nan
+                
+                half_life = -np.log(2) / np.log(beta)
+                
+                # Sanity check: half-life should be positive and reasonable
+                if half_life <= 0 or half_life > len(spread_clean) / 2:
+                    return np.nan
+                
+                return half_life
+                
+            except np.linalg.LinAlgError:
+                return np.nan
+                
+        except Exception:
+            return np.nan
