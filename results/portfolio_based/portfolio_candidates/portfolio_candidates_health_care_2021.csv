@@ -1,0 +1,11 @@
+portfolio_id,sector,assets,num_assets,edges,connectivity,avg_pvalue,score,composition,missing_pairs
+HEA_001,health_care,"GILD,HCA,LH,SYK",4,6,1.0,0.012807888587530852,0.9873540789602332,"healthcare_providers(2), pharma_large(1), medical_devices(1)",
+HEA_002,health_care,"BDX,GILD,HCA,LH",4,6,1.0,0.023975619237643686,0.976585751860485,"healthcare_providers(2), medical_devices(1), pharma_large(1)",
+HEA_003,health_care,"BDX,EW,GILD,LH",4,6,1.0,0.026661689981718053,0.9740306955622423,"medical_devices(2), pharma_large(1), healthcare_providers(1)",
+HEA_004,health_care,"BDX,GILD,HCA,LH,SYK",5,9,0.9,0.02124739219052947,0.8812752001936973,"medical_devices(2), healthcare_providers(2), pharma_large(1)",SYK-BDX
+HEA_005,health_care,"BDX,EW,GILD,HCA,LH",5,9,0.9,0.025265314890697554,0.8778215618227053,"medical_devices(2), healthcare_providers(2), pharma_large(1)",EW-HCA
+HEA_006,health_care,"DHR,EW,GILD,LH",4,5,0.8333333333333334,0.01264397704916242,0.8229282474593499,"medical_devices(2), pharma_large(1), healthcare_providers(1)",DHR-LH
+HEA_007,health_care,"DHR,EW,GILD,REGN",4,5,0.8333333333333334,0.013726945097488319,0.822049110328416,"medical_devices(2), pharma_large(1), biotech(1)",EW-REGN
+HEA_008,health_care,"DHR,EW,GILD,HCA",4,5,0.8333333333333334,0.014039296364352638,0.8217958971817892,"medical_devices(2), pharma_large(1), healthcare_providers(1)",EW-HCA
+HEA_009,health_care,"EW,GILD,LH,SYK",4,5,0.8333333333333334,0.014190194933401979,0.8216736244310222,"medical_devices(2), pharma_large(1), healthcare_providers(1)",EW-SYK
+HEA_010,health_care,"EW,GILD,HCA,LH",4,5,0.8333333333333334,0.01454164926620262,0.8213889828338407,"healthcare_providers(2), medical_devices(1), pharma_large(1)",EW-HCA

@@ -1,0 +1,11 @@
+portfolio_id,sector,assets,num_assets,edges,connectivity,avg_pvalue,score,composition,missing_pairs
+REI_001,reits,"BRX,IRM,SKT,WPC",4,6,1.0,0.006037138829864834,0.9939990894999298,"retail_reits(2), specialized_reits(1), diversified_reits(1)",
+REI_002,reits,"BRX,PSA,SKT,WPC",4,6,1.0,0.007155194218573399,0.9928956388651453,"retail_reits(2), specialized_reits(1), diversified_reits(1)",
+REI_003,reits,"BRX,EQR,SKT,WPC",4,6,1.0,0.007260058723501484,0.9927922698208622,"retail_reits(2), residential_reits(1), diversified_reits(1)",
+REI_004,reits,"BRX,EQR,ESS,SKT",4,6,1.0,0.009348632031347767,0.9907379554153322,"retail_reits(2), residential_reits(2)",
+REI_005,reits,"EQR,ESS,SKT,WPC",4,6,1.0,0.010680801761522267,0.9894320721805473,"residential_reits(2), retail_reits(1), diversified_reits(1)",
+REI_006,reits,"EQR,PSA,SKT,WPC",4,6,1.0,0.010681740147869984,0.9894311535238509,"residential_reits(1), specialized_reits(1), retail_reits(1), diversified_reits(1)",
+REI_007,reits,"BRX,EQR,PSA,SKT,WPC",5,10,1.0,0.01117291330821267,0.988950541335548,"retail_reits(2), residential_reits(1), specialized_reits(1), diversified_reits(1)",
+REI_008,reits,"AVB,CUBE,SKT,UDR",4,6,1.0,0.011589154743728236,0.988543615073983,"residential_reits(2), specialized_reits(1), retail_reits(1)",
+REI_009,reits,"BRX,EQR,ESS,SKT,WPC",5,10,1.0,0.01164075960931983,0.988493188418174,"retail_reits(2), residential_reits(2), diversified_reits(1)",
+REI_010,reits,"AVB,CUBE,SKT,WPC",4,6,1.0,0.011794729784756352,0.9883427641619902,"residential_reits(1), specialized_reits(1), retail_reits(1), diversified_reits(1)",

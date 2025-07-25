@@ -1,0 +1,11 @@
+portfolio_id,sector,assets,num_assets,edges,connectivity,avg_pvalue,score,composition,missing_pairs
+MAT_001,materials,"AMCR,CCK,CRH,X",4,6,1.0,0.013761711354530548,0.9864251024669861,"containers_packaging(2), construction_materials(1), metals_mining(1)",
+MAT_002,materials,"CCK,ECL,RYN,VMC",4,6,1.0,0.018170396591879266,0.9821538745845478,"containers_packaging(1), chemicals_specialty(1), forestry_paper(1), construction_materials(1)",
+MAT_003,materials,"AMCR,CCK,FCX,RYN",4,6,1.0,0.018278567813882665,0.9820495408706044,"containers_packaging(2), metals_mining(1), forestry_paper(1)",
+MAT_004,materials,"CCK,FCX,RYN,VMC",4,6,1.0,0.021857595645298517,0.9786099396447746,"containers_packaging(1), metals_mining(1), forestry_paper(1), construction_materials(1)",
+MAT_005,materials,"CCK,ECL,FCX,RYN,VMC",5,9,0.9,0.018418822569710922,0.8837228653424608,"containers_packaging(1), chemicals_specialty(1), metals_mining(1), forestry_paper(1), construction_materials(1)",ECL-FCX
+MAT_006,materials,"AMCR,CCK,FCX,RYN,VMC",5,9,0.9,0.021427187051918324,0.881120075330689,"containers_packaging(2), metals_mining(1), forestry_paper(1), construction_materials(1)",AMCR-VMC
+MAT_007,materials,"AMCR,CCK,FCX,X",4,5,0.8333333333333334,0.01247140343256146,0.8230685138445393,"containers_packaging(2), metals_mining(2)",X-FCX
+MAT_008,materials,"CCK,ECL,EXP,RYN",4,5,0.8333333333333334,0.013422799171229979,0.8222958216598517,"containers_packaging(1), chemicals_specialty(1), construction_materials(1), forestry_paper(1)",EXP-RYN
+MAT_009,materials,"ECL,MLM,RYN,VMC",4,5,0.8333333333333334,0.013618953974933044,0.8221366915697413,"construction_materials(2), chemicals_specialty(1), forestry_paper(1)",MLM-RYN
+MAT_010,materials,"AMCR,CCK,RYN,X",4,5,0.8333333333333334,0.01383943419666522,0.8219579010493321,"containers_packaging(2), forestry_paper(1), metals_mining(1)",X-RYN

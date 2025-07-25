@@ -1,0 +1,11 @@
+portfolio_id,sector,assets,num_assets,edges,connectivity,avg_pvalue,score,composition,missing_pairs
+TEC_001,technology,"GOOG,ORCL,TXN,UBER",4,6,1.0,0.012312027169708884,0.9878377152110583,"internet_platforms(2), software_giants(1), semiconductors(1)",
+TEC_002,technology,"GOOGL,ORCL,TXN,UBER",4,6,1.0,0.014377211198479366,0.9858265632944446,"internet_platforms(2), software_giants(1), semiconductors(1)",
+TEC_003,technology,"GOOG,INTC,ORCL,UBER",4,6,1.0,0.017397007249812215,0.9829004733394694,"internet_platforms(2), semiconductors(1), software_giants(1)",
+TEC_004,technology,"GOOGL,INTC,ORCL,UBER",4,6,1.0,0.0193963843934925,0.9809726768797274,"internet_platforms(2), semiconductors(1), software_giants(1)",
+TEC_005,technology,"ABNB,IBM,TXN,V",4,6,1.0,0.02196461267073582,0.9785074625888123,"internet_platforms(1), legacy_tech(1), semiconductors(1), payments_fintech(1)",
+TEC_006,technology,"GOOG,GOOGL,ORCL,TXN,UBER",5,9,0.9,0.010919688263895755,0.8902784369998928,"internet_platforms(3), software_giants(1), semiconductors(1)",GOOG-GOOGL
+TEC_007,technology,"GOOG,INTC,ORCL,TXN,UBER",5,9,0.9,0.013183524964242533,0.8882892169330951,"internet_platforms(2), semiconductors(2), software_giants(1)",TXN-INTC
+TEC_008,technology,"GOOGL,INTC,ORCL,TXN,UBER",5,9,0.9,0.014562505803571034,0.8870818651899292,"internet_platforms(2), semiconductors(2), software_giants(1)",TXN-INTC
+TEC_009,technology,"GOOG,GOOGL,INTC,ORCL,UBER",5,9,0.9,0.014823156705790689,0.8868540238296128,"internet_platforms(3), semiconductors(1), software_giants(1)",GOOG-GOOGL
+TEC_010,technology,"GOOG,GOOGL,INTC,ORCL,TXN,UBER",6,13,0.8666666666666667,0.011510004087440791,0.8568048394623164,"internet_platforms(3), semiconductors(2), software_giants(1)",TXN-INTC;GOOG-GOOGL

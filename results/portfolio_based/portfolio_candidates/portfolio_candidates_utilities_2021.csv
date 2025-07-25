@@ -1,0 +1,11 @@
+portfolio_id,sector,assets,num_assets,edges,connectivity,avg_pvalue,score,composition,missing_pairs
+UTI_001,utilities,"CMS,D,PPL,WEC",4,6,1.0,0.005519957644009235,0.9945103450189663,"electric_utilities(3), multi_utilities(1)",
+UTI_002,utilities,"AEE,EVRG,PEG,PPL",4,6,1.0,0.0072857458064030265,0.9927669523402515,"multi_utilities(2), electric_utilities(2)",
+UTI_003,utilities,"CMS,ETR,PPL,SO",4,6,1.0,0.007493306470787611,0.992562425553936,"multi_utilities(2), electric_utilities(2)",
+UTI_004,utilities,"AEP,D,PPL,WEC",4,6,1.0,0.007749159658583267,0.9923104280620699,electric_utilities(4),
+UTI_005,utilities,"CMS,D,ETR,PPL",4,6,1.0,0.007813728903063527,0.9922468520928285,"multi_utilities(2), electric_utilities(2)",
+UTI_006,utilities,"AEP,CMS,D,PPL,WEC",5,10,1.0,0.009773634906251261,0.9903209644534257,"electric_utilities(4), multi_utilities(1)",
+UTI_007,utilities,"AEP,CMS,D,PPL",4,6,1.0,0.010576034767648101,0.9895346471677614,"electric_utilities(3), multi_utilities(1)",
+UTI_008,utilities,"AEP,CMS,D,WEC",4,6,1.0,0.011030439349465916,0.9890899038049108,"electric_utilities(3), multi_utilities(1)",
+UTI_009,utilities,"AEE,D,ETR,PPL",4,6,1.0,0.012004466161589067,0.9881379316366848,"multi_utilities(2), electric_utilities(2)",
+UTI_010,utilities,"AEE,D,EVRG,PPL",4,6,1.0,0.012179097620230324,0.9879674480051357,"multi_utilities(2), electric_utilities(2)",

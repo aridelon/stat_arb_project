@@ -1,0 +1,11 @@
+portfolio_id,sector,assets,num_assets,edges,connectivity,avg_pvalue,score,composition,missing_pairs
+ENE_001,energy,"CTRA,NEE,NOV,PSX",4,5,0.8333333333333334,0.0219429868587895,0.8154401410344843,"oil_exploration(1), alternative_energy(1), oil_services(1), refiners(1)",CTRA-NOV
+ENE_002,energy,"CTRA,FSLR,NEE,NOV,PSX",5,7,0.7,0.023933107429601485,0.6836384085257514,"alternative_energy(2), oil_exploration(1), oil_services(1), refiners(1)",CTRA-NOV;FSLR-NEE;FSLR-PSX
+ENE_003,energy,"COP,CTRA,FANG,OXY",4,4,0.6666666666666666,0.010626986942200125,0.6596565055953673,"oil_exploration(3), oil_majors(1)",FANG-OXY;OXY-COP
+ENE_004,energy,"COP,CTRA,FANG,FSLR",4,4,0.6666666666666666,0.0124271032723622,0.6584836226844083,"oil_exploration(2), oil_majors(1), alternative_energy(1)",FANG-FSLR;FSLR-COP
+ENE_005,energy,"COP,CTRA,FANG,OKE",4,4,0.6666666666666666,0.013735703031616423,0.6576336067408632,"oil_exploration(2), oil_majors(1), natural_gas_midstream(1)",FANG-OKE;OKE-COP
+ENE_006,energy,"COP,CTRA,FANG,NEE",4,4,0.6666666666666666,0.013850465439938349,0.6575591661610385,"oil_exploration(2), oil_majors(1), alternative_energy(1)",FANG-NEE;COP-NEE
+ENE_007,energy,"COP,CTRA,FANG,WMB",4,4,0.6666666666666666,0.01386139024181,0.6575520806721556,"oil_exploration(2), oil_majors(1), natural_gas_midstream(1)",FANG-WMB;COP-WMB
+ENE_008,energy,"COP,CTRA,FANG,RUN",4,4,0.6666666666666666,0.014153708020064226,0.657362549083612,"oil_exploration(2), oil_majors(1), alternative_energy(1)",FANG-RUN;COP-RUN
+ENE_009,energy,"COP,CTRA,DVN,FANG",4,4,0.6666666666666666,0.014672912231325726,0.657026179205501,"oil_exploration(3), oil_majors(1)",FANG-DVN;COP-DVN
+ENE_010,energy,"COP,CTRA,FANG,PSX",4,4,0.6666666666666666,0.014950874614508274,0.6568462408782844,"oil_exploration(2), oil_majors(1), refiners(1)",FANG-PSX;COP-PSX

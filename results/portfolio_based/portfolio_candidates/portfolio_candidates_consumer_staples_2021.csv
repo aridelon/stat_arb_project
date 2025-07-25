@@ -1,0 +1,11 @@
+portfolio_id,sector,assets,num_assets,edges,connectivity,avg_pvalue,score,composition,missing_pairs
+CON_001,consumer_staples,"EL,KMB,KO,KR",4,5,0.8333333333333334,0.006858829094864701,0.8276565783134409,"personal_care(1), household_products(1), beverages(1), retail_staples(1)",KO-KMB
+CON_002,consumer_staples,"CLX,EL,KMB,KR",4,5,0.8333333333333334,0.012773422286031419,0.8228230668339755,"household_products(2), personal_care(1), retail_staples(1)",EL-CLX
+CON_003,consumer_staples,"CLX,HSY,KMB,KR",4,5,0.8333333333333334,0.01980466468835694,0.8171499525234986,"household_products(2), food_products(1), retail_staples(1)",HSY-KR
+CON_004,consumer_staples,"K,KDP,KMB,SJM",4,5,0.8333333333333334,0.020321790683277864,0.8167357993748972,"food_products(2), beverages(1), household_products(1)",KMB-KDP
+CON_005,consumer_staples,"COTY,K,KDP,SJM",4,5,0.8333333333333334,0.02171996768352294,0.8156181338245685,"food_products(2), personal_care(1), beverages(1)",K-COTY
+CON_006,consumer_staples,"CLX,CPB,KMB,KR",4,5,0.8333333333333334,0.0231972443913822,0.814440556697371,"household_products(2), food_products(1), retail_staples(1)",KR-CPB
+CON_007,consumer_staples,"COTY,KDP,KMB,SJM",4,5,0.8333333333333334,0.02450195067979562,0.8134033642204246,"personal_care(1), beverages(1), household_products(1), food_products(1)",KMB-KDP
+CON_008,consumer_staples,"COTY,K,KMB,SJM",4,5,0.8333333333333334,0.025519637561053143,0.812596173502062,"food_products(2), personal_care(1), household_products(1)",K-COTY
+CON_009,consumer_staples,"COTY,GIS,KMB,SJM",4,5,0.8333333333333334,0.02581126104720004,0.8123651640191827,"food_products(2), personal_care(1), household_products(1)",SJM-GIS
+CON_010,consumer_staples,"CLX,CPB,HSY,KMB",4,5,0.8333333333333334,0.026827924429047724,0.8115608404365278,"household_products(2), food_products(2)",HSY-CPB

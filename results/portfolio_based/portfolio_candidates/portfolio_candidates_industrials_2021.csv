@@ -1,0 +1,11 @@
+portfolio_id,sector,assets,num_assets,edges,connectivity,avg_pvalue,score,composition,missing_pairs
+IND_001,industrials,"ALK,CMI,DAL,LUV",4,6,1.0,0.033067179195545034,0.9679912595603951,"airlines(3), machinery_equipment(1)",
+IND_002,industrials,"CMI,DAL,DHR,JBLU",4,5,0.8333333333333334,0.01399894832107584,0.8218285972713495,"airlines(2), machinery_equipment(1), industrial_conglomerates(1)",DHR-JBLU
+IND_003,industrials,"DOV,ETN,PCAR,WM",4,5,0.8333333333333334,0.01911100490849918,0.8177061471416002,"machinery_equipment(3), waste_management(1)",DOV-WM
+IND_004,industrials,"JBHT,MLM,ODFL,VMC",4,5,0.8333333333333334,0.019320848589790482,0.8175378091071452,"logistics_delivery(2), construction_engineering(2)",VMC-ODFL
+IND_005,industrials,"DOV,ETN,PCAR,RSG",4,5,0.8333333333333334,0.02077243951023684,0.8163752282861044,"machinery_equipment(3), waste_management(1)",DOV-RSG
+IND_006,industrials,"CMI,DAL,DHR,LUV",4,5,0.8333333333333334,0.02161501718147606,0.815701922268536,"airlines(2), machinery_equipment(1), industrial_conglomerates(1)",DHR-LUV
+IND_007,industrials,"CMI,DAL,JBLU,LUV",4,5,0.8333333333333334,0.022427971297556103,0.8150533404086705,"airlines(3), machinery_equipment(1)",JBLU-LUV
+IND_008,industrials,"ALK,CMI,DAL,DHR",4,5,0.8333333333333334,0.022834001706346238,0.8147297918754386,"airlines(2), machinery_equipment(1), industrial_conglomerates(1)",DHR-ALK
+IND_009,industrials,"ALK,CMI,DAL,JBLU",4,5,0.8333333333333334,0.023646955822426284,0.8140827544041395,"airlines(3), machinery_equipment(1)",JBLU-ALK
+IND_010,industrials,"GD,PCAR,TXT,WM",4,5,0.8333333333333334,0.027361873989168378,0.8111390488899137,"defense_aerospace(2), machinery_equipment(1), waste_management(1)",PCAR-TXT

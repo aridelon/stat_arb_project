@@ -1,0 +1,11 @@
+portfolio_id,sector,assets,num_assets,edges,connectivity,avg_pvalue,score,composition,missing_pairs
+FIN_001,financials,"JPM,MET,PGR,TRV",4,5,0.8333333333333334,0.01815200130670178,0.8184763495664977,"insurance(3), mega_banks(1)",MET-JPM
+FIN_002,financials,"MET,PGR,TRV,USB",4,5,0.8333333333333334,0.019046751111620637,0.817757705840578,"insurance(3), regional_commercial_banks(1)",PGR-USB
+FIN_003,financials,"PYPL,RF,TFC,TRV",4,5,0.8333333333333334,0.025328425444575902,0.8127477134675218,"regional_commercial_banks(2), payments_fintech(1), insurance(1)",TRV-TFC
+FIN_004,financials,"KEY,PYPL,RF,TRV",4,5,0.8333333333333334,0.0301806557758242,0.8089196090619213,"regional_commercial_banks(2), payments_fintech(1), insurance(1)",RF-KEY
+FIN_005,financials,"CFG,KEY,PYPL,TRV",4,5,0.8333333333333334,0.0322161251281073,0.8073244672765689,"regional_commercial_banks(2), payments_fintech(1), insurance(1)",CFG-KEY
+FIN_006,financials,"CFG,PYPL,RF,TRV",4,5,0.8333333333333334,0.03257546602534176,0.8070435147380128,"regional_commercial_banks(2), payments_fintech(1), insurance(1)",RF-CFG
+FIN_007,financials,"JPM,MET,PGR,TRV,USB",5,7,0.7,0.0217616967507424,0.685091251928936,"insurance(3), mega_banks(1), regional_commercial_banks(1)",MET-JPM;PGR-USB;USB-JPM
+FIN_008,financials,"KEY,PYPL,RF,TFC,TRV",5,7,0.7,0.02703203101518836,0.6815756265245908,"regional_commercial_banks(3), payments_fintech(1), insurance(1)",TRV-TFC;TFC-KEY;RF-KEY
+FIN_009,financials,"CFG,PYPL,RF,TFC,TRV",5,7,0.7,0.028742609764843757,0.680442312154262,"regional_commercial_banks(3), payments_fintech(1), insurance(1)",TRV-TFC;TFC-CFG;RF-CFG
+FIN_010,financials,"CFG,KEY,PYPL,RF,TRV",5,7,0.7,0.03220848857287826,0.6781575696667768,"regional_commercial_banks(3), payments_fintech(1), insurance(1)",RF-CFG;RF-KEY;CFG-KEY
